@@ -1,0 +1,157 @@
+** exponent
+2 ** 3 == 8
+// integer division
+22 // 8 = 2
+
+
+input() function
+string type
+myName = input()
+
+
+str()  int()  float()  change data type
+
+
+truthy and falsey values
+0, 0.0 , '' are considered false
+
+while not name:
+  print('Enter your name:')
+  name = input()
+  # keep asking until not an empty string entered
+
+
+range() function
+in python, range(a,b) is like a <= x < b
+range(5,-1,-1) # 5 to 0
+
+
+sys.exit() function
+
+
+None value
+
+
+print() funtion by default will create a new line at the end in python.
+by using another argument to disable it
+print('Hello', end='') will not create a new line
+
+
+print('cats', 'dogs', 'mice', sep=',')
+cats,dogs,mice
+
+
+try except to prevent code from crushing
+def spam(divideBy):
+    try:
+        return 42 / divideBy
+    except ZeroDivisionError:
+        print('Error: Invalid argument.')
+
+# when a except is catched, no more try will be excuted
+
+
+List
+len(list)
+del list[index]
+in not in
+list.index(value)
+list.append(value)
+list.insert(index,value)
+list.remove(value)
+list.sort()
+list.sort(reverse=True)
+list.sort(key=str.lower)
+
+list [] is mutable tuple () is immutable
+use tuple () when you don't intend for that sequence of values to change
+convert between list and tuple
+tuple(['cat','dog'])
+list(('cat','dog',5))    ['cat', 'dog', 5]
+list('hello') ['h','e','l','l','o']
+
+list is always like a passing by reference, so if you change in one place, it will stay, even with different list names
+
+if you want to use pass by value
+import copy
+spam = ['A','B']
+cheese = copy.copy(spam)
+cheese[0] = 42
+this will not change the value of spam
+if the list you need to copy contains list, then use 
+copy.deepcopy()
+
+
+
+
+Dictionary  {}
+
+key could be anything
+
+keys() values() items() methods
+The values returned by these methods are not true lists. They can not be modified.Mostly used in a for loop.
+could change to a list such as
+list(spam.keys())
+
+get() method, the second argument is the default value
+picnicItems = {'apples': 5, 'cups': 2}
+'I am bringing " + str(picnicItems.get('cups', 0)) + ' cups'
+# otherwise it will trigger a KeyError
+
+setDefault()
+this will set a default value for the key if the key does not exist, if exist, it will do nothing
+
+message = 'this will set a default value for the key if the key does not exist, if exist, it will do nothing'
+count = {}
+
+for character in message:
+    count.setDefault(character,0)
+    count[character] += 1
+print(count)
+
+
+
+Pretty Printing
+
+import pprint
+ppring.ppring(count)
+
+
+
+
+
+
+string
+
+escape character \  
+print(r'That is Carol\'s cat.')
+this r here is raw string
+it will print out
+That is Carol\'s cat.
+
+multiline string 
+'''Asda
+asd
+sd'''
+
+
+
+upper(), lower(), isupper(), islower() methods
+
+isX methods
+
+isalpha() if only letters and is not blank
+isalnum() if only letters and numbers and not blank
+isdecimal() if only numeric and not blank
+isspace() if only spaces, tabs and newlines and not blank
+istitle() if only words begin with an uppercase followed by only lowercase letters
+
+
+
+
+
+
+
+ 
+
+    
