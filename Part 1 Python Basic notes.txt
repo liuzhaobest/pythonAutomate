@@ -148,6 +148,39 @@ istitle() if only words begin with an uppercase followed by only lowercase lette
 
 
 
+startwith()
+endwith()
+
+join() method
+
+str.join(list of strings)
+concatenate the list of strings with str
+
+split method
+
+str.split(something)
+
+split str by something to a list of strings
+
+rjust()  ljust()  center()
+manipulate the string
+'Hello'.rjust(20,'*')
+
+
+strip()
+lstrip()
+rstrip()
+
+strip(str)
+
+
+
+import papetclip
+paperclip.copy()
+paperclip.paste()
+interact with the computer
+
+
 
 
 
