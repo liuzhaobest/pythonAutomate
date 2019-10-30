@@ -1,0 +1,184 @@
+regexes
+
+import re
+
+\d  any numeric digit from 0 to 9
+\D  any character that is not a numberic digit from 0 to 9
+\w  any letter, numeric digit, or the underscore character   (other puntuation such as , does not count)
+\W  any letter that is not a letter, numeric digit, or the underscore character  (such as puntuation)
+\s  any space, tab or newline character
+\S  any character that is not a spece, tab, or newline
+
+
+\d{3} represent 3 numbers 
+\(     \)
+\| actual pipe character
+\*
+\?
+\+
+
+
+
+
+
+creating regex objects
+
+phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
+mo = phoneNumRex.search('My number is 415-555-4242.')  # match object
+print('Phone number found: '+ mo.group())
+
+
+tester
+regexpal.com
+
+
+Grouping with parentheses
+
+phoneNumRegex = re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')
+mo = phoneNumRex.search('My number is 415-555-4242.')  # match object
+mo.group(1)    415
+mo.group(2)    555-4242
+mo.group(0)    415-555-4242
+mo.group()    415-555-4242
+
+retrieve all the groups at pmce
+mo.groups()  ('415', '555-4242')  what is the data type for this one? tuple
+
+
+
+matching multiple groups with the Pipe
+heroRegex = re.compile(r'Batman|Tina Fey')
+
+
+batRegex = re.compile(r'Bat(man|mobile|copter|bat)')
+mo = batRegex.search('Batmobile lost a whell.')
+mo.group()
+'Batmobile)
+mo.group(1) 
+'mobile'
+
+
+
+(str)? means str is an optional search
+simple way to write or?
+
+batRegex = re.compile(r'Bat(wo)?man)')
+? means match zero or one of the group preceding this question mark. and in parentheses?
+
+* means match zero or more
+
+re.compile(r'Bat(wo)*man')
+
+batRegex.search('The Adventures of Batwowowowoman')
+
+
++ means match one or more
+
+{}
+(ha){3} means 3 times
+(ha){3,} 3 or more than 3
+(ha){,5} 5 or less than 5
+(ha).{3,5}  3 to 5 times
+
+
+python's re are greedy by default which means that in ambiguous situations they will match the longest string possible.
+
+if you want a non-greedy one, you add a ? at the end of the {}
+nongreedyHaRegex.compile(r'(ha){3,5}?')
+
+
+
+
+search() will find the first one that matches 
+
+findall() will not return a match object but return a list of strings - as long as there are no groups in the regular expression
+If there are groups in the regular expression, then findall() will return a list of tuples
+
+phoneNumRegex = re.compile(r'(\d\d\d)-(\d\d\d)-(\d\d\d\d)')
+phoneNumRegex.findall('Cell: 415-555-9999 Work: 212-555-0000)
+[('415','555','9999'),('212','555','0000')]
+
+
+
+xmasRegex = re.compile(r'\d+\s\w+')
+
+
+make your own character classes with []
+negative character classes with [^]
+
+use ^ to mean the string should start with the regex
+use $ to mean the string should end with the regex
+use both ^reg$ to mean it must be a perfect match
+caret cost money.
+
+
+
+wildcard character
+.  means any character other than newline
+
+
+match everything with .*
+nameRegex = re.compile(r'First name: (.*) Last Name: (.*)')
+The .* uses greedy mode. for a nongreedy mode, use .*?
+
+nongreedyRegex = re.compile(r'<.*?>')
+mo = nongreedyRegex.search('<To sere man> for dinner.>')
+mo.group()
+'<To searve man>'
+
+greedyRegex = re.compile(r'<.*>')
+mo = greedyRegex.search('<To sere man> for dinner.>')
+mo.group()
+'<To searve man> for dinner.>'
+
+
+
+matching newlines with the dot character
+by passing re.DOTALL as the second argument to re.compile(), you can make the dot character match all characters, including 
+the new line character.
+
+
+case insensitive matching
+pass re.IGNORECASE or re.I as the second argument
+
+substituting strings with the sub() method
+this will substitute all matches
+namesRegex = re.compile(r'Agent: \w+')
+namesRegex.sub('subStr','Agent: ab gave the secrect documents to Agent: we')
+
+passing r'\1****' as the first argument to sub() means it will not replace to group(1) of the match
+agentNamesRegex = re.compile(r'Agent(\w)\w*')
+agentNamesRegex.sub(r'\1****','Angent Alice told Agent Carol')
+A**** told C****        # where is the 'Agent' goes? This Agent just disappeared.
+
+agentNamesRegex = re.compile(r'Agent')
+print(agentNamesRegex.sub(r'Abc','Agent Clice told Agent Bob.'))  this works, something is wrong with the above code
+why the group will not affect Agent
+
+
+agentNamesRegex = re.compile(r'(Agent \w)\w*')
+print(agentNamesRegex.sub(r'k\1*','Agent Clice told Agent Bob.'))
+Oh I know, it just extract the first letter from group 1 to replace all the part that matches. Gee, ezpz.
+
+
+pass re.VERBOSE as the second argument of compile will ignore whitespace and commoents inside the re string
+
+phoneRegex = re.compile(r'''(
+    (\d{3}|(\d{3}\)?     # area code, with or with out this or with or without parentheses
+    (\s|-|\.)?           # separator
+    \d{3}                # first 3 digits
+    (\s|-|\.)            # separator   what if no separator here?
+    \d{4}
+    (\s*(ext|x|ext.)\s*\d{2,5}?    # extension
+    )''', re.VERBOSE)
+    
+Uses the triple qute syntax to create a multiline string '''    '''
+
+
+combining re.I re.DOTALL and re.VERBOSE with the pipe character in the second argument
+someRegex = re.compile('foo', re.I | re.VERBOSE | re.DOTALL)
+
+
+
+
+
